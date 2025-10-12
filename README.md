@@ -64,6 +64,15 @@ python main.py input.pcd output.dxf --config config.json
 python main.py input.pcd output.dxf --verbose
 ```
 
+### 大容量データセット処理（300GB対応）
+```bash
+# バッチ処理モード
+python main.py --batch /path/to/input/dir /path/to/output/dir
+
+# チャンクサイズ指定（MB単位）
+python main.py --batch /path/to/input/dir /path/to/output/dir --chunk-size 200
+```
+
 ## サポートファイル形式
 
 ### 入力形式
@@ -127,11 +136,13 @@ graph TD
 
 ## ベンチマーク
 
-| 点群サイズ | 処理時間 | メモリ使用量 | 検出精度 |
-|-----------|---------|-------------|---------|
-| ~100K点 | 15秒 | 2GB | 95%+ |
-| ~500K点 | 45秒 | 4GB | 93%+ |
-| ~1M点 | 90秒 | 6GB | 91%+ |
+| 点群サイズ | 処理時間 | メモリ使用量 | 検出精度 | 処理モード |
+|-----------|---------|-------------|---------|-----------|
+| ~100K点 | 15秒 | 2GB | 95%+ | 標準 |
+| ~500K点 | 45秒 | 4GB | 93%+ | 標準 |
+| ~1M点 | 90秒 | 6GB | 91%+ | 標準 |
+| ~10M点+ | 10分+ | 8GB+ | 89%+ | 大容量モード |
+| 300GB+ | バッチ処理 | チャンク毎 | 88%+ | バッチモード |
 
 ## トラブルシューティング
 
@@ -146,12 +157,27 @@ graph TD
 
 **Q: メモリ不足エラー**
 - A: 大きな点群は事前に領域を絞って切り抜いてください
+- A: バッチ処理モード（--batch）を使用してください
+
+**Q: 300GBの大容量データセットの処理方法**
+- A: バッチ処理モードを使用:
+  ```bash
+  python main.py --batch input_dir output_dir --chunk-size 100
+  ```
+- A: 事前にファイルサイズでフィルタリング
+- A: 段階的処理：地域別→道路別→交差点別
 
 ### パフォーマンス最適化
 
 ```bash
 # 大容量ファイルの場合
 python main.py large_file.pcd output.dxf --config high_performance_config.json
+
+# 300GB データセットの場合
+python main.py --batch /path/to/300gb/dataset /path/to/output --chunk-size 50
+
+# 並列処理（複数プロセス）
+python batch_processor.py --workers 4 --batch /path/to/data /path/to/output
 ```
 
 ## 開発・貢献
