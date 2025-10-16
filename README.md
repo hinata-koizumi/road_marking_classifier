@@ -12,13 +12,12 @@ python -m venv .venv && source .venv/bin/activate
 pip install -e .
 
 # サンプルデータ生成
-python data/samples/generate_dummy_las.py --out data/samples/site01.las --epsg 6677
+python data/samples/generate_dummy_pcd.py --out data/samples/site01.pcd
 
 # パイプライン実行
 python scripts/run_pipeline.py \
-  --in data/samples/site01.las \
-  --out data/output/site01.dxf \
-  --epsg 6677
+  --in data/samples/site01.pcd \
+  --out data/output/site01.dxf
 ```
 
 ## 📁 プロジェクト構造
@@ -45,13 +44,12 @@ road-marking-classifier/
 │   └── output/                   # 出力データ
 ├── scripts/                      # ユーティリティスクリプト
 ├── tests/                        # テストコード
-├── docs/                         # ドキュメント
-└── legacy/                       # 旧バージョン（アーカイブ）
+└── docs/                         # ドキュメント
 ```
 
 ## 🔄 パイプライン処理フロー
 
-1. **点群読み込み** - LAS/LAZ/PCDファイルの読み込み
+1. **点群読み込み** - PCDファイルの読み込み
 2. **前処理** - ボクセルダウンサンプリング、路面推定
 3. **BEV生成** - 鳥瞰図ラスタライズ
 4. **検出** - ライン検出（PPHT）、横断歩道検出
@@ -62,18 +60,28 @@ road-marking-classifier/
 
 ```bash
 python scripts/run_pipeline.py \
-  --in input.las \
-  --out output.dxf \
-  --epsg 6677 \
+  --in data/input/sample.pcd \
+  --out data/output/sample.dxf \
   --roi 35.0 \
   --bev 0.05 \
+  --intensity-near 0.28 \
+  --intensity-far 0.45 \
+  --intensity-range 35.0 \
   --stop-line 6.0 \
+  --stop-dist 5.0 \
+  --stop-angle 20.0 \
+  --line-cluster-eps 1.5 \
+  --line-cluster-min 2 \
   --dp 0.02
 ```
 
 - `--roi`: BEV生成時の半径（m）
 - `--bev`: BEVピクセル解像度（m/pixel）
+- `--intensity-near` / `--intensity-far` / `--intensity-range`: 距離に応じた強度しきい値
 - `--stop-line`: 停止線判定長さ（m）
+- `--stop-dist`: 横断歩道からの距離閾値（m）
+- `--stop-angle`: 横断歩道進行方向との角度許容値（deg）
+- `--line-cluster-eps` / `--line-cluster-min`: ラインのDBSCANクラスタリング設定
 - `--dp`: Douglas-Peucker簡略化許容誤差（m）
 
 ## 📊 出力形式
@@ -90,18 +98,18 @@ python scripts/run_pipeline.py \
 python -m pytest tests/
 
 # 統合テスト
-python scripts/run_pipeline.py --in data/samples/site01.las --out test_output.dxf
+python scripts/run_pipeline.py --in data/samples/site01.pcd --out test_output.dxf
 ```
 
 ## 📚 依存関係
 
 - `numpy>=1.23`
 - `scipy>=1.9`
-- `laspy>=2.4`
 - `open3d>=0.17`
 - `opencv-python>=4.7`
 - `ezdxf>=1.1`
 - `shapely>=2.0`
+- `scikit-learn>=1.3`
 
 ## 🔧 開発
 

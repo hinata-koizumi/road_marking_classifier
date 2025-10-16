@@ -1,13 +1,13 @@
 ## Dummy Data
 
-`generate_dummy_las.py` creates synthetic 100m road corridors with white lines, stop lines, crosswalks, and curbs for functional testing.
+`generate_dummy_pcd.py` creates a synthetic 100 m road corridor with lane markings, stop lines, crosswalk stripes, and curbs for functional testing.
 
 ### Generate
 
 ```bash
-python data_samples/generate_dummy_las.py --out data_samples/site01.las --epsg 6677
+python data/samples/generate_dummy_pcd.py --out data/samples/site01.pcd
 ```
 
 ### Real Data
 
-Place real LAS/LAZ/PCD files under `data_samples/` and update `eval/bench_list.csv`.
+Place real PCD files under `data/samples/` (or provide their paths to the CLI).

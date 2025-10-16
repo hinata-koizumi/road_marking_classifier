@@ -1,6 +1,5 @@
 numpy>=1.23
 scipy>=1.9
-laspy>=2.4
 open3d>=0.17
 opencv-python>=4.7
 ezdxf>=1.1

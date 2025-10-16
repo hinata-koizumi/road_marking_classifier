@@ -6,7 +6,6 @@ dependencies:
   - pip
   - numpy
   - scipy
-  - laspy
   - open3d
   - opencv
   - ezdxf

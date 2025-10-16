@@ -1,8 +1,0 @@
-point_density_threshold: 30
-intensity_snr_threshold: 0.35
-switch_penalty: 1.2
-image_route:
-  bev_resolution_m: 0.02
-  canny_low: 50
-  canny_high: 150
-  ppht_threshold: 60

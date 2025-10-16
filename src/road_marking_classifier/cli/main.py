@@ -10,9 +10,9 @@ from ..pipeline import run_pipeline
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Minimal pipeline: PCD/LAS input → color-coded DXF output."
+        description="Minimal pipeline: PCD input → color-coded DXF output."
     )
-    parser.add_argument("--in", dest="input_path", required=True, help="Input PCD/LAS path.")
+    parser.add_argument("--in", dest="input_path", required=True, help="Input PCD path.")
     parser.add_argument("--out", dest="output_path", required=True, help="Output DXF path.")
     parser.add_argument("--epsg", type=int, help="Override EPSG code when missing in source.")
     parser.add_argument("--voxel", type=float, default=0.04, help="Voxel size in meters.")

@@ -15,11 +15,11 @@ setup(
     install_requires=[
         "numpy>=1.23",
         "scipy>=1.9",
-        "laspy>=2.4",
         "open3d>=0.17",
         "opencv-python>=4.7",
         "ezdxf>=1.1",
         "shapely>=2.0",
+        "scikit-learn>=1.3",
     ],
     entry_points={
         "console_scripts": [

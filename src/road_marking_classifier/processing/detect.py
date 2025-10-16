@@ -245,8 +245,9 @@ def _refit_line(group: List[PrimitiveGeometry]) -> PrimitiveGeometry:
     points = np.vstack([g.points for g in group])
     centroid = points.mean(axis=0)
     centered = points - centroid
-    u, _, _ = np.linalg.svd(centered[:, :2], full_matrices=False)
-    direction = u[:, 0]
+    _, _, vh = np.linalg.svd(centered[:, :2], full_matrices=False)
+    direction = vh[0]
+    direction /= np.linalg.norm(direction) + 1e-6
     proj = centered[:, :2] @ direction
     min_pt = centroid[:2] + direction * proj.min()
     max_pt = centroid[:2] + direction * proj.max()
