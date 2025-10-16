@@ -38,7 +38,7 @@ python main.py --batch input_dir output_dir --chunk-size 100
 python main.py input.pcd output.dxf --verbose
 ```
 
-### 設定ファイル（config.json）
+### 設定ファイル（configs/default_config.json）
 ```json
 {
     "white_threshold": 0.58,
@@ -110,13 +110,30 @@ matplotlib>=3.7.0
 
 ```
 road-marking-classifier/
-├── main.py                    # メインスクリプト
-├── config.json               # 設定ファイル
-├── requirements.txt          # 依存関係
-├── README.md                 # ドキュメント
-├── test.py                   # テストスクリプト
-├── examples/                 # 使用例
-└── .github/                  # CI/CD設定
+├── main.py                         # CLIラッパー
+├── setup.py                        # パッケージ設定
+├── requirements.txt                # 依存関係一覧
+├── configs/
+│   └── default_config.json         # デフォルト設定
+├── data/
+│   ├── raw/                        # 生データの配置先
+│   ├── interim/                    # 中間生成物
+│   ├── processed/                  # 処理済みデータ
+│   └── external/                   # 外部入手データ
+├── src/
+│   └── road_marking_classifier/
+│       ├── __init__.py
+│       └── cli.py                  # メイン実装
+├── examples/
+│   └── usage_examples.py           # 使用例
+├── tests/
+│   └── manual_test.py              # 手動テストスクリプト
+├── legacy/
+│   └── enhanced_extractor.py       # 旧実装
+├── assets/
+│   └── debug_binary_image_complete.png
+└── docs/
+    └── SHARING_GUIDE.md
 ```
 
 **作成日**: 2025年10月12日  

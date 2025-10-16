@@ -7,9 +7,13 @@ Road Marking Classifier - Usage Examples
 
 import os
 import sys
-sys.path.append('..')
+from pathlib import Path
 
-from main import EnhancedWhiteLineExtractor
+ROOT_DIR = Path(__file__).resolve().parents[1]
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+
+from legacy import EnhancedWhiteLineExtractor
 
 
 def example_basic_usage():
@@ -191,8 +195,8 @@ def main():
         print("\n🎉 全ての使用例が完了しました！")
         print("\n📚 詳細な情報:")
         print("- README.md: プロジェクトの概要")
-        print("- config.json: 設定パラメータ")
-        print("- test.py: テストスクリプト")
+        print("- configs/default_config.json: 設定パラメータ")
+        print("- tests/manual_test.py: テストスクリプト")
         
     except Exception as e:
         print(f"\n❌ エラーが発生しました: {e}")

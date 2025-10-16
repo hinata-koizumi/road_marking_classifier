@@ -1,0 +1,28 @@
+seed: 42
+epsg_default: 6677
+tile_size_m: 40
+roi_radius_m: 40
+bev_resolution_m: 0.03
+mode: auto
+intensity_thresholds:
+  near: 0.6
+  mid: 0.45
+  far: 0.35
+height_limits_m:
+  lower: -0.05
+  upper: 0.05
+output:
+  dxf_layer_map:
+    road_line: ROAD_LINE
+    stop_line: STOP_LINE
+    crosswalk: CROSSWALK
+    curb: CURB
+    review: QC_REVIEW
+  douglas_peucker_m: 0.02
+  timestamp_format: "%Y-%m-%dT%H:%M:%SZ"
+logging:
+  level: INFO
+  file: logs/pipeline.log
+failover:
+  point_density_min: 35
+  intensity_snr_min: 0.35

@@ -1,0 +1,16 @@
+name: road-marking-vectorizer
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - numpy
+  - scipy
+  - laspy
+  - open3d
+  - opencv
+  - ezdxf
+  - scikit-learn
+  - shapely
+  - pip:
+      - -r requirements.txt

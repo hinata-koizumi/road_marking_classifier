@@ -5,12 +5,21 @@ Road Marking Classifier - Test Script
 道路標示分類システム テストスクリプト
 """
 
-import sys
 import os
+import sys
+from pathlib import Path
+
 import numpy as np
 import open3d as o3d
-from main import EnhancedWhiteLineExtractor
 import shutil
+
+ROOT_DIR = Path(__file__).resolve().parents[1]
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+
+from legacy import EnhancedWhiteLineExtractor
+
+CONFIG_PATH = ROOT_DIR / "configs" / "default_config.json"
 
 
 def test_with_real_data():
@@ -55,7 +64,7 @@ def test_with_real_data():
     
     try:
         # 分類システムを初期化
-        extractor = EnhancedWhiteLineExtractor(config_path="config.json")
+        extractor = EnhancedWhiteLineExtractor(config_path=str(CONFIG_PATH))
         
         # 処理実行
         result = extractor.process_pcd_file(test_file, output_file)
@@ -181,7 +190,7 @@ def run_test():
     # テストファイルパス
     test_input = "test_road.pcd"
     test_output = "test_result.dxf"
-    test_config = "config.json"
+    test_config = str(CONFIG_PATH)
     
     try:
         # テスト点群を保存

@@ -1,0 +1,2 @@
+sample_id,input_path,epsg,roi,bev_resolution,mode,out_path
+site01,data_samples/site01.las,6677,40,0.03,auto,out/site01.dxf

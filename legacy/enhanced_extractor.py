@@ -672,7 +672,7 @@ def main():
 使用例:
   # 単一ファイル処理
   python main.py input.pcd output.dxf
-  python main.py input.pcd output.dxf --config config.json
+  python main.py input.pcd output.dxf --config configs/default_config.json
   
   # 大容量データセット処理
   python main.py --batch input_dir output_dir
