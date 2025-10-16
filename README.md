@@ -2,7 +2,7 @@
 
 最小限のコンポーネントで「点群 → DXF」変換を行うシンプルな道路標示分類システム。
 
-## 🚀 Quick Start
+## Quick Start
 
 ```bash
 # 環境セットアップ
@@ -21,7 +21,7 @@ python scripts/run_pipeline.py \
   --epsg 6677
 ```
 
-## 📁 プロジェクト構造
+## プロジェクト構造
 
 ```
 road-marking-classifier/
@@ -49,7 +49,7 @@ road-marking-classifier/
 └── legacy/                       # 旧バージョン（アーカイブ）
 ```
 
-## 🔄 パイプライン処理フロー
+## パイプライン処理フロー
 
 1. **点群読み込み** - LAS/LAZ/PCDファイルの読み込み
 2. **前処理** - ボクセルダウンサンプリング、路面推定
@@ -58,7 +58,7 @@ road-marking-classifier/
 5. **分類** - ROAD_LINE/STOP_LINE/CROSSWALK分類
 6. **DXF出力** - CAD互換形式での出力
 
-## ⚙️ 設定パラメータ
+## 設定パラメータ
 
 ```bash
 python scripts/run_pipeline.py \
@@ -76,14 +76,14 @@ python scripts/run_pipeline.py \
 - `--stop-line`: 停止線判定長さ（m）
 - `--dp`: Douglas-Peucker簡略化許容誤差（m）
 
-## 📊 出力形式
+## 出力形式
 
 ### DXFファイル構造
 - **レイヤー**: `ROAD_LINE`, `STOP_LINE`, `CROSSWALK`, `QC_REVIEW`
 - **エンティティ**: `LINE`, `LWPOLYLINE`
 - **XDATA**: クラス名、信頼度、ソースタイル、タイムスタンプ
 
-## 🧪 テスト
+## テスト
 
 ```bash
 # 単体テスト
@@ -93,7 +93,7 @@ python -m pytest tests/
 python scripts/run_pipeline.py --in data/samples/site01.las --out test_output.dxf
 ```
 
-## 📚 依存関係
+## 依存関係
 
 - `numpy>=1.23`
 - `scipy>=1.9`
@@ -103,7 +103,7 @@ python scripts/run_pipeline.py --in data/samples/site01.las --out test_output.dx
 - `ezdxf>=1.1`
 - `shapely>=2.0`
 
-## 🔧 開発
+## 開発
 
 ```bash
 # 開発モードでインストール
@@ -117,6 +117,6 @@ isort src/
 mypy src/
 ```
 
-## 📝 ライセンス
+## ライセンス
 
 MIT License - 詳細は [LICENSE](LICENSE) を参照してください。
