@@ -1,6 +1,6 @@
 # Road Marking Classifier
 
-最小限のコンポーネントで「点群 → DXF」変換を行うシンプルな道路標示分類システム。
+点群 → DXF変換を行う道路標示分類システム。
 
 ## Quick Start
 
